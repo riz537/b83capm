@@ -1,0 +1,34 @@
+GET http://localhost:4004/odata/v4/prd-mgmt/$metadata
+
+
+### query oeration
+
+GET http://localhost:4004/odata/v4/prd-mgmt/Products
+
+### READ Operation
+
+GET http://localhost:4004/odata/v4/prd-mgmt/Products(24820398-9330-4a9b-b648-b202a9d2ba6f)
+
+### create product
+
+POST http://localhost:4004/odata/v4/prd-mgmt/Products
+Content-Type: application/json
+
+{
+      "name": "Apple watch",
+      "price": "150000.00",
+      "discount": 10,
+      "stock": 63
+}
+
+### udpate stock
+
+PATCH http://localhost:4004/odata/v4/prd-mgmt/Products(7422f628-1137-460d-bf45-2b9fb8c7b9f2)
+Content-Type: application/json
+
+{
+     "stock": 20
+}
+
+### delete product
+DELETE http://localhost:4004/odata/v4/prd-mgmt/Products(7422f628-1137-460d-bf45-2b9fb8c7b9f2)

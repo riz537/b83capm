@@ -1,0 +1,29 @@
+{
+  "name": "b83capmapp",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@cap-js/hana": "^3.1.1",
+    "@sap/cds": "^10"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^3",
+    "cds-plugin-ui5": "^0.17.0"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-prdmgmtui": "cds watch --open com.demo.prdmgmtui/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-project1": "cds watch --open project1/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-ordermgmtui": "cds watch --open com.demo.ordermgmtui/index.html?sap-ui-xx-viewCache=false --livereload false"
+  },
+  "private": true,
+  "workspaces": [
+    "app/*"
+  ],
+  "sapux": [
+    "app/prdmgmtui",
+    "app/project1",
+    "app/prdmgmtui",
+    "app/ordermgmtui"
+  ]
+}
