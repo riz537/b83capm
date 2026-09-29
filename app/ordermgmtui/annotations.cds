@@ -1,117 +1,129 @@
 using OrderMgmtService as service from '../../srv/ordermgmt-srv';
 
-annotate service.Orders with @(UI.SelectionFields: [
-    ID,
-    storeName,
-    netPrice,
-    customerName,
-],
-    UI.LineItem : [
+annotate service.Orders with @(
+    UI.SelectionFields             : [
+        ID,
+        storeName,
+        netPrice,
+        customerName,
+    ],
+    UI.LineItem                    : [
         {
-            $Type : 'UI.DataField',
-            Value : ID,
+            $Type: 'UI.DataField',
+            Value: ID,
         },
         {
-            $Type : 'UI.DataField',
-            Value : createdBy,
+            $Type: 'UI.DataField',
+            Value: createdBy,
         },
         {
-            $Type : 'UI.DataField',
-            Value : storeName,
+            $Type: 'UI.DataField',
+            Value: storeName,
         },
         {
-            $Type : 'UI.DataField',
-            Value : customerName,
+            $Type: 'UI.DataField',
+            Value: customerName,
         },
         {
-            $Type : 'UI.DataField',
-            Value : netPrice,
+            $Type: 'UI.DataField',
+            Value: netPrice,
         },
     ],
-    UI.HeaderInfo : {
-        TypeName : 'Order',
-        TypeNamePlural : 'Orders',
-        Title : {
-            $Type : 'UI.DataField',
-            Value : ID,
+    UI.HeaderInfo                  : {
+        TypeName      : 'Order',
+        TypeNamePlural: 'Orders',
+        Title         : {
+            $Type: 'UI.DataField',
+            Value: ID,
         },
-        Description : {
-            $Type : 'UI.DataField',
-            Value : netPrice,
+        Description   : {
+            $Type: 'UI.DataField',
+            Value: netPrice,
         },
-        TypeImageUrl : 'sap-icon://sales-order',
+        TypeImageUrl  : 'sap-icon://sales-order',
     },
-    UI.DataPoint #createdBy : {
-        $Type : 'UI.DataPointType',
-        Value : createdBy,
-        Title : 'createdBy',
+    UI.DataPoint #createdBy        : {
+        $Type: 'UI.DataPointType',
+        Value: createdBy,
+        Title: 'createdBy',
     },
-     UI.DataPoint #storeName : {
-        $Type : 'UI.DataPointType',
-        Value : storeName,
-        Title : 'Store Name',
+    UI.DataPoint #storeName        : {
+        $Type: 'UI.DataPointType',
+        Value: storeName,
+        Title: 'Store Name',
     },
-     UI.DataPoint #customerName : {
-        $Type : 'UI.DataPointType',
-        Value : customerName,
-        Title : 'Customer Name',
+    UI.DataPoint #customerName     : {
+        $Type: 'UI.DataPointType',
+        Value: customerName,
+        Title: 'Customer Name',
     },
-    UI.HeaderFacets : [
+    UI.HeaderFacets                : [
         {
             $Type : 'UI.ReferenceFacet',
-            ID : 'createdBy',
-            Target : '@UI.DataPoint#createdBy',
-        },
-        {
-            $Type : 'UI.ReferenceFacet',
-            ID : 'createdBy',
-            Target : '@UI.DataPoint#storeName',
+            ID    : 'createdBy',
+            Target: '@UI.DataPoint#createdBy',
         },
         {
             $Type : 'UI.ReferenceFacet',
-            ID : 'createdBy',
-            Target : '@UI.DataPoint#customerName',
+            ID    : 'createdBy',
+            Target: '@UI.DataPoint#storeName',
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID    : 'createdBy',
+            Target: '@UI.DataPoint#customerName',
         },
     ],
-    UI.Facets : [
+    UI.Facets                      : [
         {
             $Type : 'UI.ReferenceFacet',
             Label : 'Order Information',
-            ID : 'OrderInformation',
-            Target : '@UI.FieldGroup#OrderInformation',
+            ID    : 'OrderInformation',
+            Target: '@UI.FieldGroup#OrderInformation',
         },
         {
             $Type : 'UI.ReferenceFacet',
             Label : 'Item Details',
-            ID : 'ItemDetails',
-            Target : 'items/@UI.LineItem#ItemDetails',
+            ID    : 'ItemDetails',
+            Target: 'items/@UI.LineItem#ItemDetails',
         },
     ],
-    UI.FieldGroup #OrderInformation : {
-        $Type : 'UI.FieldGroupType',
+    UI.FieldGroup #OrderInformation: {
+        $Type: 'UI.FieldGroupType',
         Data : [
             {
-                $Type : 'UI.DataField',
-                Value : ID,
+                $Type: 'UI.DataField',
+                Value: ID,
             },
             {
-                $Type : 'UI.DataField',
-                Value : storeName,
+                $Type: 'UI.DataField',
+                Value: storeName,
             },
             {
-                $Type : 'UI.DataField',
-                Value : customerName,
+                $Type: 'UI.DataField',
+                Value: customerName,
             },
             {
-                $Type : 'UI.DataField',
-                Value : customerMobile,
+                $Type: 'UI.DataField',
+                Value: customerMobile,
             },
             {
-                $Type : 'UI.DataField',
-                Value : netPrice,
+                $Type: 'UI.DataField',
+                Value: netPrice,
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: homeDelivery,
+                Label : 'Home Delivery',
+            },
+             {
+                $Type: 'UI.DataField',
+                Value: address,
+                Label : 'Address',
             },
         ],
-    },);
+    },
+);
 
 annotate service.Orders with {
     ID             @Common.Label: 'Order ID';
@@ -120,78 +132,77 @@ annotate service.Orders with {
     customerName   @Common.Label: 'Customer Name';
     customerMobile @Common.Label: 'Customer Mobile';
 };
-annotate service.OrderItems with @(
-    UI.LineItem #ItemDetails : [
-        {
-            $Type : 'UI.DataField',
-            Value : ID,
-            Label : 'ID',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : order_ID,
-            Label : 'order_ID',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : product_ID,
-            Label : 'product_ID',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : unitPrice,
-            Label : 'unitPrice',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : quantity,
-            Label : 'quantity',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : discount,
-            Label : 'discount',
-        },
-        {
-            $Type : 'UI.DataField',
-            Value : totalPrice,
-            Label : 'totalPrice',
-        },
-    ]
-);
+
+annotate service.OrderItems with @(UI.LineItem #ItemDetails: [
+    {
+        $Type: 'UI.DataField',
+        Value: ID,
+        Label: 'ID',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: order_ID,
+        Label: 'order_ID',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: product_ID,
+        Label: 'product_ID',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: unitPrice,
+        Label: 'unitPrice',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: quantity,
+        Label: 'quantity',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: discount,
+        Label: 'discount',
+    },
+    {
+        $Type: 'UI.DataField',
+        Value: totalPrice,
+        Label: 'totalPrice',
+    },
+]);
 
 annotate service.OrderItems with {
     product @(
-        Common.ValueList : {
-            $Type : 'Common.ValueListType',
-            CollectionPath : 'Products',
-            Parameters : [
+        Common.ValueList               : {
+            $Type         : 'Common.ValueListType',
+            CollectionPath: 'Products',
+            Parameters    : [
                 {
-                    $Type : 'Common.ValueListParameterInOut',
-                    LocalDataProperty : product_ID,
-                    ValueListProperty : 'ID',
+                    $Type            : 'Common.ValueListParameterInOut',
+                    LocalDataProperty: product_ID,
+                    ValueListProperty: 'ID',
                 },
                 {
-                    $Type : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'name',
+                    $Type            : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty: 'name',
                 },
                 {
-                    $Type : 'Common.ValueListParameterOut',
-                    ValueListProperty : 'price',
-                    LocalDataProperty : unitPrice,
+                    $Type            : 'Common.ValueListParameterOut',
+                    ValueListProperty: 'price',
+                    LocalDataProperty: unitPrice,
                 },
                 {
-                    $Type : 'Common.ValueListParameterOut',
-                    ValueListProperty : 'discount',
-                    LocalDataProperty : discount,
+                    $Type            : 'Common.ValueListParameterOut',
+                    ValueListProperty: 'discount',
+                    LocalDataProperty: discount,
                 },
                 {
-                    $Type : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty : 'stock',
+                    $Type            : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty: 'stock',
                 },
             ],
-            Label : 'Select Product',
+            Label         : 'Select Product',
         },
-        Common.ValueListWithFixedValues : false,
-)};
-
+        Common.ValueListWithFixedValues: false,
+    )
+};

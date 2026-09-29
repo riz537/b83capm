@@ -1,7 +1,9 @@
 namespace b83capm.db;
 using { cuid,managed } from '@sap/cds/common';
 
-
+type address{
+    areaName:String;
+}
 
 entity Products:cuid,managed{
     name: String(50) @mandatory @assert.format : '^[A-Za-z0-9 ]+$'  @assert.format.message: 'Name should contain only alphabets and numbers';
@@ -19,6 +21,7 @@ entity Orders : cuid,managed {
     storeName: String(20);
     netPrice: Decimal(9,2);
     items: Composition of many OrderItems on items.order=$self;
+
     
 }
 

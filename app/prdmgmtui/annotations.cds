@@ -33,6 +33,16 @@ annotate service.Products with @(
             Criticality : statusColor,
             CriticalityRepresentation : #WithIcon,
         },
+            {
+                $Type : 'UI.DataFieldForAction',
+                Action : 'PrdMgmtService.ApplyDiscount',
+                Label : 'Apply Discount',
+            },
+            {
+                $Type : 'UI.DataFieldForAction',
+                Action : 'PrdMgmtService.AddStock',
+                Label : 'Add Stock',
+            },
     ],
     @UI.Criticality : statusColor,
     } ,

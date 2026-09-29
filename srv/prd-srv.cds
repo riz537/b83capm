@@ -16,5 +16,13 @@ service PrdMgmtService {
           else 3
           end as statusColor : Integer
 
+    }actions{
+      @Common.SideEffects:{TargetProperties:['discount']}
+      action ApplyDiscount(discount:Int16) returns String;
+     @Common.SideEffects:{TargetProperties:['stock','status','statusColor']}
+      action AddStock(stock:Int16) returns String;
     }
+
+
+     
 }
