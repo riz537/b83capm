@@ -30,6 +30,10 @@ export class OrderMgmtService extends cds.ApplicationService {
     this.before(['CREATE','UPDATE'],Orders,async(req)=>{
       console.log("before Create on Order");
        console.log(req.data);
+
+       if(req.data.homeDelivery && !req.data.address){
+          req.reject(400,"Address is madantory pleae fill it ");
+       }
        const items = req.data.items;
        for(const item of items){
            const qty = item.quantity;

@@ -18,9 +18,10 @@ service PrdMgmtService {
 
     }actions{
       @Common.SideEffects:{TargetProperties:['discount']}
-      action ApplyDiscount(discount:Int16) returns String;
+      action ApplyDiscount(discount:Int16 @Common.Label: 'Apply Discount') returns String;
      @Common.SideEffects:{TargetProperties:['stock','status','statusColor']}
-      action AddStock(stock:Int16) returns String;
+    
+      action AddStock(stock:Int16 @Common.Label: 'Add Stock') returns String;
     }
 
 

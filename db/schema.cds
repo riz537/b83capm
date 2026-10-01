@@ -20,6 +20,8 @@ entity Orders : cuid,managed {
     customerMobile: String(10);
     storeName: String(20);
     netPrice: Decimal(9,2);
+    homeDelivery: Boolean default false;
+    address: String(300);
     items: Composition of many OrderItems on items.order=$self;
 
     

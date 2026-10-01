@@ -112,18 +112,24 @@ annotate service.Orders with @(
                 Value: netPrice,
             },
             {
-                $Type: 'UI.DataField',
-                Value: homeDelivery,
-                Label : 'Home Delivery',
+                $Type : 'UI.DataField',
+                Value : homeDelivery,
+               
             },
-             {
-                $Type: 'UI.DataField',
-                Value: address,
-                Label : 'Address',
+            {
+                $Type : 'UI.DataField',
+                Value : address,
+               
             },
+            
         ],
     },
 );
+annotate service.Orders with{
+    address @UI.MultiLineText;
+    address @Common.FieldControl: ( homeDelivery = true? #Mandatory : #ReadOnly );
+    address @UI.Hidden: ( homeDelivery = false );
+}
 
 annotate service.Orders with {
     ID             @Common.Label: 'Order ID';
@@ -131,6 +137,8 @@ annotate service.Orders with {
     netPrice       @Common.Label: 'Net Price';
     customerName   @Common.Label: 'Customer Name';
     customerMobile @Common.Label: 'Customer Mobile';
+    homeDelivery @Common.Label: 'Home Delivery';
+    address @Common.Label: 'Address';
 };
 
 annotate service.OrderItems with @(UI.LineItem #ItemDetails: [
