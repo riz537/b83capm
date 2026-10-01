@@ -20,8 +20,8 @@ service PrdMgmtService {
       @Common.SideEffects:{TargetProperties:['discount']}
       action ApplyDiscount(discount:Int16 @Common.Label: 'Apply Discount') returns String;
      @Common.SideEffects:{TargetProperties:['stock','status','statusColor']}
-    
-      action AddStock(stock:Int16 @Common.Label: 'Add Stock') returns String;
+    @Core.OperationAvailable:(:in.stock<10)
+      action AddStock(in: $self, stock:Int16 @Common.Label: 'Add Stock') returns String;
     }
 
 

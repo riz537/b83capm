@@ -121,7 +121,46 @@ annotate service.Orders with @(
                 Value : address,
                
             },
+            {
+                $Type : 'UI.DataField',
+                Value : country_code,
+                Label : 'Country',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : state_code,
+                Label : 'State',
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : district_code,
+                Label : 'District',
+            },
             
+        ],
+    },
+    UI.FieldGroup #formMacro : {
+        Data : [
+            {
+                $Type : 'UI.DataField',
+                Value : ID,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : customerName,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : customerMobile,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : homeDelivery,
+            },
+            {
+                $Type : 'UI.DataField',
+                Value : netPrice,
+            },
         ],
     },
 );
@@ -214,3 +253,76 @@ annotate service.OrderItems with {
         Common.ValueListWithFixedValues: false,
     )
 };
+annotate service.Orders with {
+    country @(
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Countries',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : country_code,
+                    ValueListProperty : 'code',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'name',
+                },
+            ],
+            Label : 'Select Country',
+        },
+        Common.ValueListWithFixedValues : false,
+)};
+
+annotate service.Orders with {
+    state @(
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'States',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : state_code,
+                    ValueListProperty : 'code',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterIn',
+                    ValueListProperty : 'country_code',
+                    LocalDataProperty : country_code,
+                },
+            ],
+            Label : 'Select State',
+        },
+        Common.ValueListWithFixedValues : false,
+)};
+
+annotate service.Orders with {
+    district @(
+        Common.ValueList : {
+            $Type : 'Common.ValueListType',
+            CollectionPath : 'Districts',
+            Parameters : [
+                {
+                    $Type : 'Common.ValueListParameterInOut',
+                    LocalDataProperty : district_code,
+                    ValueListProperty : 'code',
+                },
+                {
+                    $Type : 'Common.ValueListParameterDisplayOnly',
+                    ValueListProperty : 'name',
+                },
+                {
+                    $Type : 'Common.ValueListParameterIn',
+                    ValueListProperty : 'state_code',
+                    LocalDataProperty : state_code,
+                },
+            ],
+            Label : 'Select District',
+        },
+        Common.ValueListWithFixedValues : false,
+)};
+
