@@ -4,7 +4,8 @@
   "type": "module",
   "dependencies": {
     "@cap-js/hana": "^3.1.1",
-    "@sap/cds": "^10"
+    "@sap/cds": "^10",
+    "@sap/xssec": "^4"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^3",
@@ -25,5 +26,46 @@
     "app/project1",
     "app/prdmgmtui",
     "app/ordermgmtui"
-  ]
+  ],
+  "cds": {
+    "requires": {
+      "[production]": {
+        "auth": "xsuaa"
+      },
+      "[development]":{
+        "auth":{
+          "kind": "mocked",
+          "users": {
+            "umesh":{
+              "password": "umesh",
+              "roles": [
+                "Employee"
+              ],
+              "attr": {
+                "storeName":["GACHIBOWLI"]
+              }
+            },
+            "divya":{
+              "password": "divya",
+              "roles": [
+                "Employee"
+              ],
+              "attr": {
+                "storeName":["INORBIT"]
+              }
+            },
+            "manoj":{
+              "password": "manoj",
+              "roles": [
+                "Owner"
+              ],
+              "attr": {
+                "storeName":["GACHIBOWLI","INORBIT","KPHB"]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

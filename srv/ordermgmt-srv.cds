@@ -6,6 +6,24 @@ service OrderMgmtService {
         SourceEntities  : ['items'],
         TargetProperties: ['netPrice']
     }
+
+    
+
+    @restrict:[
+        {
+           grant:['*'],
+           to:'Owner' 
+        },
+        {
+           grant:['WRITE'],
+           to:'Employee' 
+        },
+        {
+           grant:['READ'],
+           to:'Employee' , where:(storeName = $user.storeName)
+        }
+    ]
+    
     entity Orders     as projection on db.Orders;
 
     @Common.SideEffects: {
@@ -15,6 +33,7 @@ service OrderMgmtService {
         ],
         TargetProperties: ['totalPrice']
     }
+    @requires:['Employee','Owner']
     entity OrderItems as projection on db.OrderItems;
 
     entity Products   as projection on db.Products;

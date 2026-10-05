@@ -1,4 +1,13 @@
 using PrdMgmtService as service from '../../srv/prd-srv';
+
+annotate service.Products with @(
+   UI.CreateHidden                           : {$edmJson: {$Not: {$Path: '/Configuration/isOwner'}}},
+   UI.UpdateHidden                           : {$edmJson: {$Not: {$Path: '/Configuration/isOwner'}}},
+   UI.DeleteHidden                           : {$edmJson: {$Not: {$Path: '/Configuration/isOwner'}}},
+
+);    
+
+
 annotate service.Products with @(
     UI.SelectionFields : [
         ID,

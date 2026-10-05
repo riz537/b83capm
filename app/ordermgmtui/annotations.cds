@@ -179,7 +179,14 @@ annotate service.Orders with {
     homeDelivery @Common.Label: 'Home Delivery';
     address @Common.Label: 'Address';
 };
-
+annotate service.Products with {
+    ID             @Common.Label: 'ID';
+    name      @Common.Label: 'Name';
+    price       @Common.Label: 'Price';
+    discount   @Common.Label: 'Discount';
+    stock @Common.Label: 'Stock';
+  
+};
 annotate service.OrderItems with @(UI.LineItem #ItemDetails: [
     {
         $Type: 'UI.DataField',
@@ -189,32 +196,32 @@ annotate service.OrderItems with @(UI.LineItem #ItemDetails: [
     {
         $Type: 'UI.DataField',
         Value: order_ID,
-        Label: 'order_ID',
+        Label: 'Order ID',
     },
     {
         $Type: 'UI.DataField',
         Value: product_ID,
-        Label: 'product_ID',
+        Label: 'Product ID',
     },
     {
         $Type: 'UI.DataField',
         Value: unitPrice,
-        Label: 'unitPrice',
+        Label: 'Unit Price',
     },
     {
         $Type: 'UI.DataField',
         Value: quantity,
-        Label: 'quantity',
+        Label: 'Quantity',
     },
     {
         $Type: 'UI.DataField',
         Value: discount,
-        Label: 'discount',
+        Label: 'Discount',
     },
     {
         $Type: 'UI.DataField',
         Value: totalPrice,
-        Label: 'totalPrice',
+        Label: 'Total Price',
     },
 ]);
 
@@ -243,10 +250,7 @@ annotate service.OrderItems with {
                     ValueListProperty: 'discount',
                     LocalDataProperty: discount,
                 },
-                {
-                    $Type            : 'Common.ValueListParameterDisplayOnly',
-                    ValueListProperty: 'stock',
-                },
+               
             ],
             Label         : 'Select Product',
         },

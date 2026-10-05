@@ -1,0 +1,47 @@
+{
+  "xsappname": "store-management-app",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Owner",
+      "description": "Owner role"
+    },
+    {
+      "name": "$XSAPPNAME.Employee",
+      "description": "Employee role"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "storeName",
+      "description": "Store Name",
+      "valueType": "string"
+    }
+  ],
+  "role-templates": [
+    {
+      "name": "Owner",
+      "description": "Owner Role Template",
+      "scope-reference": [
+        "$XSAPPNAME.Owner"
+      ],
+      "attribute-references": [
+        {
+          "name": "storeName"
+        }
+      ]
+    },
+    {
+      "name": "Employee",
+      "description": "Employee Role Template",
+      "scope-reference": [
+        "$XSAPPNAME.Employee"
+      ],
+      "attribute-references": [
+        {
+          "name": "storeName"
+        }
+      ]
+    }
+  ]
+}

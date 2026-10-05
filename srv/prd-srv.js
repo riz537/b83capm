@@ -36,6 +36,11 @@ export class PrdMgmtService extends cds.ApplicationService { init() {
         }
     });
     
+    this.on('READ', 'Configuration', async req => {
+      req.reply({
+        isOwner: req.user.is('Owner') //admin is the role, which for example is also used in @requires annotation
+      });
+    });
 
 
   return super.init()

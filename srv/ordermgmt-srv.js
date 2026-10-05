@@ -6,6 +6,11 @@ export class OrderMgmtService extends cds.ApplicationService {
 
     const { Orders, OrderItems, Products } = cds.entities('OrderMgmtService')
     
+    this.before("CREATE",Orders.drafts,async(req)=>{
+      let aStoreName = Array.isArray(req.user.attr.storeName)?req.user.attr.storeName:[req.user.attr.storeName];
+      req.data.storeName = aStoreName[0];
+
+    });
 
     this.after("DELETE",OrderItems.drafts,async(result, req)=>{
       const allDraftItems = await SELECT.from(OrderItems.drafts).where({ order_ID: req.data.order_ID });
