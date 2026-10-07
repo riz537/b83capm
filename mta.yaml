@@ -1,0 +1,190 @@
+_schema-version: 3.3.0
+ID: b83capmapp
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+  enable-parallel-deployments: true
+  deploy_mode: html5-repo
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm ci
+        - npx cds build --production
+modules:
+  - name: b83capmapp-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      instances: 1
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm-ci
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: b83capmapp-auth
+      - name: b83capmapp-db
+      - name: b83capmapp-destination
+
+  - name: b83capmapp-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: b83capmapp-db
+
+  - name: b83capmapp-app-deployer
+    type: com.sap.application.content
+    path: gen
+    build-parameters:
+      build-result: app/
+      requires:
+        - name: b83capmappordermgmtui
+          artifacts:
+            - ordermgmtui.zip
+          target-path: app/
+        - name: b83capmappprdmgmtui
+          artifacts:
+            - prdmgmtui.zip
+          target-path: app/
+    requires:
+      - name: b83capmapp-auth
+      - name: srv-api
+      - name: b83capmapp-html5-repo-host
+        parameters:
+          content-target: true
+          config:
+            HTML5Runtime_enabled: true
+    parameters:
+      config:
+        destinations:
+          - Name: srv-api
+            URL: ~{srv-api/srv-url}
+            Authentication: NoAuthentication
+            Type: HTTP
+            ProxyType: Internet
+            ForwardAuthToken: true
+            DynamicDestination: true
+
+  - name: b83capmappordermgmtui
+    type: html5
+    path: app/ordermgmtui
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+  - name: b83capmappprdmgmtui
+    type: html5
+    path: app/prdmgmtui
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm ci
+        - npm run build
+      supported-platforms:
+        []
+
+  - name: b83capmapp-destinations
+    type: com.sap.application.content
+    requires:
+      - name: b83capmapp-auth
+        parameters:
+          service-key:
+            name: b83capmapp-auth-key
+      - name: b83capmapp-html5-repo-host
+        parameters:
+          service-key:
+            name: b83capmapp-html5-repo-host-key
+      - name: srv-api
+      - name: b83capmapp-destination
+        parameters:
+          content-target: true
+    build-parameters:
+      no-source: true
+    parameters:
+      content:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+            - Name: b83capmapp-html5-repository
+              ServiceInstanceName: b83capmapp-html5-repo-host
+              ServiceKeyName: b83capmapp-html5-repo-host-key
+              sap.cloud.service: b83capmapp.service
+            - Name: b83capmapp-auth
+              Authentication: OAuth2UserTokenExchange
+              ServiceInstanceName: b83capmapp-auth
+              ServiceKeyName: b83capmapp-auth-key
+              sap.cloud.service: b83capmapp.service
+
+resources:
+  - name: b83capmapp-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: b83capmapp-${org}-${space}
+        tenant-mode: dedicated
+        oauth2-configuration:
+          credential-types:
+            - "binding-secret"
+            - "x509"
+        role-collections:
+          - name: 'Owner (b83capmapp ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.Owner'
+          - name: 'Employee (b83capmapp ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.Employee'
+          - name: 'userattributes (b83capmapp ${org}-${space})'
+            description: 'generated'
+            role-template-references:
+              - '$XSAPPNAME.userattributes'
+  - name: b83capmapp-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  - name: b83capmapp-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+     config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            HTML5.DynamicDestination: true
+            HTML5.ForwardAuthToken: true
+            Name: srv-api
+            ProxyType: Internet
+            Type: HTTP
+            URL: ~{srv-api/srv-url}
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      service: destination
+      service-plan: lite
+    requires:
+      - name: srv-api
+
+  - name: b83capmapp-html5-repo-host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-plan: app-host

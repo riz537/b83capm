@@ -9,6 +9,14 @@
     {
       "name": "$XSAPPNAME.Employee",
       "description": "Employee role"
+    },
+    {
+      "name": "$XSAPPNAME.Owner",
+      "description": "Owner"
+    },
+    {
+      "name": "$XSAPPNAME.Employee",
+      "description": "Employee"
     }
   ],
   "attributes": [

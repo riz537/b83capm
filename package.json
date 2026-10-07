@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
-    "@cap-js/hana": "^3.1.1",
+    "@cap-js/hana": "^3",
     "@sap/cds": "^10",
     "@sap/xssec": "^4"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^3",
+    "@sap/cds-dk": "^10",
     "cds-plugin-ui5": "^0.17.0"
   },
   "scripts": {
@@ -30,42 +31,54 @@
   "cds": {
     "requires": {
       "[production]": {
-        "auth": "xsuaa"
+        "auth": "xsuaa",
+        "db": "hana"
       },
-      "[development]":{
-        "auth":{
+      "[development]": {
+        "auth": {
           "kind": "mocked",
           "users": {
-            "umesh":{
+            "umesh": {
               "password": "umesh",
               "roles": [
                 "Employee"
               ],
               "attr": {
-                "storeName":["GACHIBOWLI"]
+                "storeName": [
+                  "GACHIBOWLI"
+                ]
               }
             },
-            "divya":{
+            "divya": {
               "password": "divya",
               "roles": [
                 "Employee"
               ],
               "attr": {
-                "storeName":["INORBIT"]
+                "storeName": [
+                  "INORBIT"
+                ]
               }
             },
-            "manoj":{
+            "manoj": {
               "password": "manoj",
               "roles": [
                 "Owner"
               ],
               "attr": {
-                "storeName":["GACHIBOWLI","INORBIT","KPHB"]
+                "storeName": [
+                  "GACHIBOWLI",
+                  "INORBIT",
+                  "KPHB"
+                ]
               }
             }
           }
         }
-      }
+      },
+      "destinations": true,
+      "html5-repo": true,
+      "workzone": true
     }
   }
 }

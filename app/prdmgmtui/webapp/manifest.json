@@ -24,6 +24,21 @@
           "odataVersion": "4.0"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "prdmgmtui-manage": {
+          "semanticObject": "prdmgmtui",
+          "action": "manage",
+          "title": "Products Management Application",
+          "icon": "sap-icon://add-product",
+          "info": "Application to manage prodcuts",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
     }
   },
   "sap.ui": {
@@ -147,5 +162,9 @@
     "app": {
       "enableLazyLoading": true
     }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "b83capmapp.service"
   }
 }

@@ -24,6 +24,21 @@
           "odataVersion": "4.0"
         }
       }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "ordmgmtui-manage": {
+          "semanticObject": "ordmgmtui",
+          "action": "manage",
+          "title": "Order Management Application",
+          "icon": "sap-icon://my-sales-order",
+          "info": "Store Orders",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
     }
   },
   "sap.ui": {
@@ -237,5 +252,9 @@
     "app": {
       "enableLazyLoading": true
     }
+  },
+  "sap.cloud": {
+    "public": true,
+    "service": "b83capmapp.service"
   }
 }
