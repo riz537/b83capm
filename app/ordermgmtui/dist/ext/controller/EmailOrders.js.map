@@ -1,0 +1,1 @@
+{"version":3,"file":"EmailOrders.js","names":["sap","ui","define","MessageToast","emailOrders","oContext","aSelectedContexts","show"],"sources":["EmailOrders-dbg.js"],"mappings":"AAAAA,IAAIC,GAAGC,OAAO,CACV,sBACD,SAASC,GACR,aAEA,MAAO,CAOHC,YAAa,SAASC,EAAUC,GAC5BH,EAAaI,KAAK,0BACtB,EAER","ignoreList":[]}

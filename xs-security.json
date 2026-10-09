@@ -9,14 +9,6 @@
     {
       "name": "$XSAPPNAME.Employee",
       "description": "Employee role"
-    },
-    {
-      "name": "$XSAPPNAME.Owner",
-      "description": "Owner"
-    },
-    {
-      "name": "$XSAPPNAME.Employee",
-      "description": "Employee"
     }
   ],
   "attributes": [
@@ -30,7 +22,7 @@
     {
       "name": "Owner",
       "description": "Owner Role Template",
-      "scope-reference": [
+      "scope-references": [
         "$XSAPPNAME.Owner"
       ],
       "attribute-references": [
@@ -42,7 +34,7 @@
     {
       "name": "Employee",
       "description": "Employee Role Template",
-      "scope-reference": [
+      "scope-references": [
         "$XSAPPNAME.Employee"
       ],
       "attribute-references": [

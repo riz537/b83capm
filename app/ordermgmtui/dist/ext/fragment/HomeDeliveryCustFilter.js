@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/model/Filter","sap/ui/model/FilterOperator"],function(e,r){"use strict";return{filterItems:function(t){switch(t){case"0":return new e({path:"homeDelivery",operator:r.EQ,value1:true});case"1":return new e({path:"homeDelivery",operator:r.EQ,value1:false})}}}});
+//# sourceMappingURL=HomeDeliveryCustFilter.js.map

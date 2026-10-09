@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/ControllerExtension"],function(t){"use strict";return t.extend("com.demo.ordermgmtui.ext.controller.ObjectPageController",{override:{onInit:function(){}},showOrderInfo:async function(){const t=this.base.getExtensionAPI().getBindingContext();const e=t.getObject();console.log("Order:",e);const o=t.getPath();console.log("Order Path:",o);const n=t.getModel();const s=n.bindList(o+"/items");const c=await s.requestContexts();const r=c.map(t=>t.getObject());console.log("Items:",r)}})});
+//# sourceMappingURL=ObjectPageController.controller.js.map

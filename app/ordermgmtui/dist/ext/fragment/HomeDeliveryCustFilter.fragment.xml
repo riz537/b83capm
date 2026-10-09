@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+        <ComboBox
+            id="HomeDeliveryFilter"
+            width="100%"
+            core:require="{handler: 'com/demo/ordermgmtui/ext/fragment/HomeDeliveryCustFilter'}"
+            selectedKey="{path: 'filterValues>', type: 'sap.fe.macros.filter.type.Value', formatOptions: { operator: 'com.demo.ordermgmtui.ext.fragment.HomeDeliveryCustFilter.filterItems' }}"
+        >
+            <items>
+                <core:Item id="id1" key="0" text="Item1"/>
+                <core:Item id="id2" key="1" text="Item2"/>
+            </items>
+        </ComboBox>
+</core:FragmentDefinition>
