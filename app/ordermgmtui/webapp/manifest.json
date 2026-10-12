@@ -172,6 +172,7 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/Orders",
+              "enhanceI18n": "i18n/custom.properties",
               "navigation": {
                 "items": {
                   "detail": {

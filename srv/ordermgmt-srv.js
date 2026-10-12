@@ -62,6 +62,7 @@ export class OrderMgmtService extends cds.ApplicationService {
            await UPDATE(Products).set({stock:product.stock-qty}).where({ID:productID});
            
        }
+       
     });
 
     function calculateItemTotalPrice(draftItem) {

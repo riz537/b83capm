@@ -171,7 +171,7 @@ annotate service.Orders with{
 }
 
 annotate service.Orders with {
-    ID             @Common.Label: 'Order ID';
+    ID             @Common.Label: '{i18n>OrderId}';
     storeName      @Common.Label: 'Store Name';
     netPrice       @Common.Label: 'Net Price';
     customerName   @Common.Label: 'Customer Name';

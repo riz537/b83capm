@@ -23,6 +23,21 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 				// 	 this.base.getView().getBindingContext().setProperty("district_code",null);
 				// }.bind(this));
 
+			},
+			editFlow: {
+				onAfterSave: async function () {
+					const oContext = this.getView().getBindingContext();
+
+					if (!oContext) {
+						return;
+					}
+
+					const sOrderID = await oContext.requestProperty("ID");
+
+					sap.m.MessageToast.show(
+						"Order Create - " + sOrderID
+					);
+				}
 			}
 
 		},
@@ -59,6 +74,7 @@ sap.ui.define(['sap/ui/core/mvc/ControllerExtension'], function (ControllerExten
 			);
 
 			console.log("Items:", aItems);
-		}
+		},
+
 	});
 });
