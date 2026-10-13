@@ -22,7 +22,8 @@
     "watch-storealp": "cds watch --open com.demo.storealp/index.html?sap-ui-xx-viewCache=false --livereload false",
     "undeploy": "cf undeploy b83capmapp --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
-    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "watch-storeovp": "cds watch --open com.demo.storeovp/index.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "private": true,
   "workspaces": [
@@ -33,7 +34,8 @@
     "app/project1",
     "app/prdmgmtui",
     "app/ordermgmtui",
-    "app/storealp"
+    "app/storealp",
+    "app/storeovp"
   ],
   "cds": {
     "requires": {

@@ -52,7 +52,8 @@ annotate StoreALPService.OrderItems with @(
         Role: #Category
      }],
      MeasureAttributes:[{
-        Measure : totalPrice,
+        //Measure : totalPrice,
+        DynamicMeasure : @Analytics.AggregatedProperty#totalPrice,
         Role:#Axis1
      }]
   },

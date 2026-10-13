@@ -62,6 +62,10 @@ modules:
       - comdemostorealp.zip
       name: comdemostorealp
       target-path: app/
+    - artifacts:
+      - comdemostoreovp.zip
+      name: comdemostoreovp
+      target-path: app/
 - name: b83capmappordermgmtui
   type: html5
   path: app/ordermgmtui
@@ -116,6 +120,16 @@ modules:
 - name: comdemostorealp
   type: html5
   path: app/storealp
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: comdemostoreovp
+  type: html5
+  path: app/storeovp
   build-parameters:
     build-result: dist
     builder: custom
